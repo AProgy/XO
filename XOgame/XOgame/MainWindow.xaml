@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XOgame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="X O" 
+        Height="500" 
+        Width="500"
+        MinHeight="300"
+        MinWidth="300"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.25*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="X" Text="X" Grid.Row="2" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <UniformGrid Rows="3" Columns="3" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button x:Name="one"    Width="Auto" Height="Auto"/>
+            <Button x:Name="two"    Width="Auto" Height="Auto"/>
+            <Button x:Name="three"  Width="Auto" Height="Auto"/>
+            <Button x:Name="four"   Width="Auto" Height="Auto"/>
+            <Button x:Name="five"   Width="Auto" Height="Auto"/>
+            <Button x:Name="six"    Width="Auto" Height="Auto"/>
+            <Button x:Name="seven"  Width="Auto" Height="Auto"/>
+            <Button x:Name="eight"  Width="Auto" Height="Auto"/>
+            <Button x:Name="nine"   Width="Auto" Height="Auto"/>
+        </UniformGrid>
+
+        <TextBlock x:Name="O" Text="O" Grid.Row="2" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
     </Grid>
 </Window>
