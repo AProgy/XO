@@ -11,7 +11,9 @@
         MinHeight="300"
         MinWidth="300"
         WindowStartupLocation="CenterScreen"
-        SizeToContent="WidthAndHeight">
+        SizeToContent="WidthAndHeight"
+        WindowState="Normal"
+        ShowInTaskbar="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.25*"/>
@@ -24,21 +26,23 @@
             <ColumnDefinition Width="0.25*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="X" Text="X" Grid.Row="2" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="xWins" Text="0" Grid.Row="0" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="oWins" Text="0" Grid.Row="0" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <TextBlock x:Name="x" Text="X" Grid.Row="2" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <UniformGrid Rows="3" Columns="3" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Button x:Name="one"    Width="Auto" Height="Auto"/>
-            <Button x:Name="two"    Width="Auto" Height="Auto"/>
-            <Button x:Name="three"  Width="Auto" Height="Auto"/>
-            <Button x:Name="four"   Width="Auto" Height="Auto"/>
-            <Button x:Name="five"   Width="Auto" Height="Auto"/>
-            <Button x:Name="six"    Width="Auto" Height="Auto"/>
-            <Button x:Name="seven"  Width="Auto" Height="Auto"/>
-            <Button x:Name="eight"  Width="Auto" Height="Auto"/>
-            <Button x:Name="nine"   Width="Auto" Height="Auto"/>
+            <Button x:Name="one"    FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
+            <Button x:Name="two"    FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
+            <Button x:Name="three"  FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
+            <Button x:Name="four"   FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
+            <Button x:Name="five"   FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
+            <Button x:Name="six"    FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
+            <Button x:Name="seven"  FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
+            <Button x:Name="eight"  FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
+            <Button x:Name="nine"   FontSize="50" Width="Auto" Height="Auto" Click="OnButtonClick"/>
         </UniformGrid>
 
-        <TextBlock x:Name="O" Text="O" Grid.Row="2" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+        <TextBlock x:Name="o" Text="O" Grid.Row="2" Grid.Column="2" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </Window>
