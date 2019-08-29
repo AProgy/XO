@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace XOgame
 {
@@ -75,39 +64,62 @@ namespace XOgame
             turn++;
 
             if (turn >= 5)
-                Win(turn, xPos, oPos);
+                Win(turn);
         }
 
-        private async void Win(byte turn, List<byte> xPos, List<byte> oPos)
+        private async void Win(byte turn)
         {
-            await Task.Run(() =>
-            {
-                byte xCount = 0;
-                byte oCount = 0;
+            string winFigure = await GetFigureCountAsync(turn);
+            MessageBoxResult res;
 
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 3; j++)
-                    {
-                        if (xPos.Contains(winPositions[i, j]))
-                            xCount++;
+            if (string.IsNullOrEmpty(winFigure) && turn == 9) res = MessageBox.Show($"Do you want to start new game?", "Draw!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                        if (turn != 5)
-                            if (oPos.Contains(winPositions[i, j]))
-                                oCount++;
-                    }
+            else if (string.IsNullOrEmpty(winFigure) && turn != 9) return;
 
-                    if (xCount != 3) xCount = 0;
-                    else if (MessageBox.Show($"Do you want to start new game?", "X win!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No) Application.Current.Shutdown();
+            else res = MessageBox.Show($"Do you want to start new game?", $"{winFigure} win!", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                    if (oCount != 3) oCount = 0;
-                    else if (MessageBox.Show($"Do you want to start new game?", "O win!", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                    {
-                        Process.Start(Application.ResourceAssembly.Location);
-                        Application.Current.Shutdown();
-                    }
-                }
-            });
+            if (res == MessageBoxResult.Yes) Restart(winFigure);
+            else CloseApp();
         }
+
+        private async Task<string> GetFigureCountAsync(byte turn)
+        {
+            return await Task.Run(() => FigureCount(turn));
+        }
+
+        private string FigureCount(byte turn)
+        {
+            byte xCount = 0;
+            byte oCount = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (xPos.Contains(winPositions[i, j]))
+                        xCount++;
+
+                    if (turn != 5)
+                        if (oPos.Contains(winPositions[i, j]))
+                            oCount++;
+                }
+
+                if (xCount != 3) xCount = 0;
+                else return "X";
+
+                if (oCount != 3) oCount = 0;
+                else return "O";
+            }
+
+            return null;
+        }
+
+        private void Restart(string winFigure)
+        {
+            System.Windows.Forms.Application.Restart();
+            Application.Current.Shutdown();
+        }
+
+        private void CloseApp() => Application.Current.Shutdown();
     }
 }
