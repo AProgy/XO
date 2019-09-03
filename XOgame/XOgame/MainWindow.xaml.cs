@@ -11,6 +11,9 @@ namespace XOgame
         {
             InitializeComponent();
             o.Visibility = Visibility.Hidden;
+
+            xWin.Text = xWins.ToString();
+            oWin.Text = oWins.ToString();
         }
 
         private readonly Dictionary<string, byte> numbers = new Dictionary<string, byte>
@@ -40,6 +43,9 @@ namespace XOgame
 
         private List<byte> xPos = new List<byte>(5);
         private List<byte> oPos = new List<byte>(4);
+
+        private int xWins = 0;
+        private int oWins = 0;
 
         private byte turn = 0;
 
@@ -116,8 +122,51 @@ namespace XOgame
 
         private void Restart(string winFigure)
         {
-            System.Windows.Forms.Application.Restart();
-            Application.Current.Shutdown();
+            one.Content = "";
+            one.IsEnabled = true;
+
+            two.Content = "";
+            two.IsEnabled = true;
+
+            three.Content = "";
+            three.IsEnabled = true;
+
+            four.Content = "";
+            four.IsEnabled = true;
+
+            five.Content = "";
+            five.IsEnabled = true;
+
+            six.Content = "";
+            six.IsEnabled = true;
+
+            seven.Content = "";
+            seven.IsEnabled = true;
+
+            eight.Content = "";
+            eight.IsEnabled = true;
+
+            nine.Content = "";
+            nine.IsEnabled = true;
+
+            xPos.Clear();
+            oPos.Clear();
+
+            turn = 0;
+
+            o.Visibility = Visibility.Hidden;
+            x.Visibility = Visibility.Visible;
+
+            if (winFigure == "X")
+            {
+                xWins++;
+                xWin.Text = xWins.ToString();
+            }
+            else if (winFigure == "O")
+            {
+                oWins++;
+                oWin.Text = oWins.ToString();
+            }
         }
 
         private void CloseApp() => Application.Current.Shutdown();
