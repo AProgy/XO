@@ -122,40 +122,7 @@ namespace XOgame
 
         private void Restart(string winFigure)
         {
-            one.Content = "";
-            one.IsEnabled = true;
-
-            two.Content = "";
-            two.IsEnabled = true;
-
-            three.Content = "";
-            three.IsEnabled = true;
-
-            four.Content = "";
-            four.IsEnabled = true;
-
-            five.Content = "";
-            five.IsEnabled = true;
-
-            six.Content = "";
-            six.IsEnabled = true;
-
-            seven.Content = "";
-            seven.IsEnabled = true;
-
-            eight.Content = "";
-            eight.IsEnabled = true;
-
-            nine.Content = "";
-            nine.IsEnabled = true;
-
-            xPos.Clear();
-            oPos.Clear();
-
-            turn = 0;
-
-            o.Visibility = Visibility.Hidden;
-            x.Visibility = Visibility.Visible;
+            ResetAsync();
 
             if (winFigure == "X")
             {
@@ -167,6 +134,32 @@ namespace XOgame
                 oWins++;
                 oWin.Text = oWins.ToString();
             }
+        }
+
+        private async void ResetAsync() => await Task.Run(() => Reset());
+
+        private async void Reset()
+        {
+            await Task.Run(() =>
+            {
+                one.Content = ""; one.IsEnabled = true;
+                two.Content = ""; two.IsEnabled = true;
+                three.Content = ""; three.IsEnabled = true;
+                four.Content = ""; four.IsEnabled = true;
+                five.Content = ""; five.IsEnabled = true;
+                six.Content = ""; six.IsEnabled = true;
+                seven.Content = ""; seven.IsEnabled = true;
+                eight.Content = ""; eight.IsEnabled = true;
+                nine.Content = ""; nine.IsEnabled = true;
+
+                xPos.Clear();
+                oPos.Clear();
+
+                turn = 0;
+
+                o.Visibility = Visibility.Hidden;
+                x.Visibility = Visibility.Visible;
+            });
         }
 
         private void CloseApp() => Application.Current.Shutdown();
